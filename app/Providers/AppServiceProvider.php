@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Route::bind('slug',function($slug){
+            return \App\Models\Question::where('slug',$slug)->first() ?? abort(404);
+        });
+
         Paginator::useBootstrap();
     }
 }
